@@ -2,7 +2,9 @@ import matplotlib.pylab as plt
 import cv2
 import numpy as np
 import sys
-
+import os
+import datetime
+import time
 
 
 def region_of_interest(img, vertices):
@@ -38,8 +40,14 @@ def canny(image):
     edges = cv2.Canny(image,50,150)
     return edges
 
+def save_image(image, frame_count, tag):
+    save_folder = output_path + format(str(frame_count))
+    if not os.path.exists(save_folder):
+        os.mkdir(save_folder)
+    save_location = save_folder + f"/{tag}.jpg"
+    cv2.imwrite(save_location, image)
 
-def process(image):
+def process(image, save_frame, frame_count):
     print(image.shape)
     height = image.shape[0]
     width = image.shape[1]
@@ -48,11 +56,17 @@ def process(image):
         (width/2, height*0.7),
         (width, height)
     ]
-    gray_image = grey(image)
-    gaussian_image = gauss(gray_image)
+    grey_image = grey(image)
+    gaussian_image = gauss(grey_image)
     canny_image = canny(gaussian_image)
     cropped_image = region_of_interest(canny_image,
                     np.array([region_of_interest_vertices], np.int32),)
+
+    if save_frame:
+        save_image(grey_image, frame_count, "greyscale")
+        save_image(canny_image, frame_count, "canny")
+        save_image(cropped_image, frame_count, "cropped_image")
+
     lines = cv2.HoughLinesP(cropped_image,
                             rho=2,
                             theta=np.pi/180,
@@ -60,34 +74,57 @@ def process(image):
                             lines=np.array([]),
                             minLineLength=20,
                             maxLineGap=200)
+
     if lines is not None:
         image_with_lines = drow_the_lines(image, lines)
         return image_with_lines
-    
+
     return image
 
 
 
-video_title = "video/" + sys.argv[1] + ".mp4"
+# Main Program
+try: 
+    video_title = sys.argv[1] 
+except:
+    # Test
+    video_title =  'scenario1_clear_urban'
 
-cap = cv2.VideoCapture(video_title)
+
+dirname = os.path.dirname(__file__)
+video_directory = os.path.join(dirname, 'video_input')
+
+video_path = os.path.join(video_directory, video_title + ".mp4")
+run_name = video_title + "/{0}/".format(datetime.datetime.utcnow().strftime("%s"))
+
+output_path = os.path.join("output/" + run_name)
+os.makedirs(output_path)    
+
+cap = cv2.VideoCapture(video_path)
 frame_count = 0
 
 while cap.isOpened():
     ret, frame = cap.read()
+    key=cv2.waitKey(1)
+    save_frame = False
 
-    if frame is not None or frame_count > 5000:
+    if key == 27:
+        break
+    elif key == 32:
+        save_frame = True
+
+    if frame is not None:
         frame_count+=1
-        frame = process(frame)    
+        frame = process(frame, save_frame, frame_count)    
         cv2.imshow('frame', frame)
-        key=cv2.waitKey(1)
-        # if frame_count % 1000 == 0: 
-        #     cv2.imwrite('kang'+str(frame_count)+'.jpg',frame)
-        if key == 27:
-            break
-        elif key == 32:
-            cv2.imwrite('screenshots/screenshot_'+str(frame_count)+'.jpg',frame)
 
+        if save_frame:
+            save_image(frame, frame_count, "frame")
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+        save_frame = False
 
 cap.release()
 cv2.destroyAllWindows()
