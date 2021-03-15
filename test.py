@@ -1,18 +1,11 @@
-import numpy as np
-from PIL import Image
-# result = (4*14 + 4) + (24+16)*4 + 36
+import math 
 
-# sobel_h = [-1, -2, -1, 0, 0, 0, 1, 2, 1]
-# sobel_v = [-1, -2, -1, 0, 0, 0, 1, 2, 1]
+def calculate_line_angle(x1, y1, x2, y2):
+    y = (y2 - y1)**2
+    x = (x2 - x1)**2
+    theta = math.atan(math.sqrt(y)/math.sqrt(x))
+    theta_deg = math.degrees(theta)
+    return theta_deg 
 
-# sobel_h = np.array(sobel_h).reshape(3,3)
-# sobel_v = np.array(sobel_v).reshape(3,3)
-# print(sobel_h, "\n", sobel_v)
-
-image_size = 50
-blank_image = np.random.rand(image_size,image_size)*256
-blank_image = np.round(blank_image, 0)
-
-img = Image.fromarray(blank_image, 'RGB')
-# img.save('my.png')
-img.show()
+angle = calculate_line_angle(100, 100, 200, 200)
+print(angle)
