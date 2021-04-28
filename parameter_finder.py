@@ -65,12 +65,6 @@ def process(image, save_frame, frame_count):
     
     height = image.shape[0]
     width = image.shape[1]
-    region_of_interest_vertices = [
-        (0, height),
-        (width/2.5, height*0.7),
-        (width/1.5, height*0.7),
-        (width*0.9, height)
-    ]
 
     grey_image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
     gaussian_image = cv2.GaussianBlur(grey_image, (5, 5), 0)
