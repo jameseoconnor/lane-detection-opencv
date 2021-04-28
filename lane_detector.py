@@ -75,11 +75,9 @@ def process(image, save_frame, frame_count):
         (width/1.5, height*0.7),
         (width*0.9, height)
     ]
-    image_brightened = increase_brightness(image)
+
     grey_image = cv2.cvtColor(image_brightened, cv2.COLOR_RGB2GRAY)
     gaussian_image = cv2.GaussianBlur(grey_image, (5, 5), 0)
-    # kernel = np.ones((5, 5), np.uint8)
-    # opening = cv2.morphologyEx(gaussian_image, cv2.MORPH_OPEN, kernel)  # Open (erode, then dilate)
     edges = cv2.Canny(gaussian_image,50,150)
     cropped_image = region_of_interest(edges,
                     np.array([region_of_interest_vertices], np.int32),)
