@@ -35,7 +35,7 @@ There does not seem to be a consensus on how to test lane following algorithms, 
 
 The algorithm design was based on Yoo, Lee, Park, &amp; Kim (2017) and code by pknowledge (2020) and is outlined in Figure 1. This algorithm was be repeated for each frame of the video The sample videos ran at 24 FPS and resolution 720p on a 2 GHz Quad-Core Intel Core i5.
 
-![Shape2](RackMultipart20211203-4-1n4bcgn_html_df0168c6e56d40ca.gif)
+![Figure_1](https://github.com/jameseoconnor/lane-detection-opencv/blob/main/static/Figure_1.png)
 
 **Figure 1: Algorithm Design**
 
@@ -44,7 +44,7 @@ The algorithm design was based on Yoo, Lee, Park, &amp; Kim (2017) and code by p
 As the goal of this paper is to investigate the efficacy of a lane detection algorithm in different scenarios, the initial step was to design the test scenarios based on the video selected for analysis. Xia, Duan, Gao, Hu, &amp; He (2018) provide a test scenario design framework for intelligent vehicles that ensures adequate coverage and effectiveness. The framework works as follows: decide the influential factors, rank them by degree of importance, create combinatorial test cases for all of these factors and then group them into larger test cases. The figures below were taken from the paper, which lists a number of influential factors including environment, road, traffic and vehicle dynamics. However, for the sake of brevity, as well as not having access to vehicle dynamics data, the factors were not weighted and only environment camera and traffic conditions were considered as test case variables.
 
 
-![Figure_2](static/Figure_2.jpg)
+![Figure_2](https://github.com/jameseoconnor/lane-detection-opencv/blob/main/static/Figure_2.png)
 
 
 From these influential factors, eight scenarios were derived as seen in Table 1. These test scenarios were designed to give a high coverage of each influential factor.
