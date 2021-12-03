@@ -43,9 +43,7 @@ As the goal of this paper is to investigate the efficacy of a lane detection alg
 
 From these influential factors, eight scenarios were derived as seen in Table 1. These test scenarios were designed to give a high coverage of each influential factor.
 
-|
- | **Environmental Factors** | **Camera** | **Traffic** |
-| --- | --- | --- | --- |
+
 | **Scenario #** | **Weather** | **Time** | **Light Change** | **Angle** | **Vehicle Flow** |
 | 1 | Fine (B) | Daytime | No Change | Low | 10 |
 | 2 | Fine (B) | Daytime | None | Normal | 10 |
@@ -55,6 +53,8 @@ From these influential factors, eight scenarios were derived as seen in Table 1.
 | 6 | Fine (O) | Daytime | No Change | High | 80 |
 | 7 | Rain (H) | Daytime | No Change | High | 10 |
 | 8 | Rain (L) | Daytime | None | Normal | 10 |
+
+**Table 1: Test Scenarios**
 
 ## Algorithm Testing
 
