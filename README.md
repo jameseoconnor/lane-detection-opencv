@@ -3,9 +3,7 @@ camera parameter finding module for my colllege assignment using OpenCV
 
 # Evaluating Lane Detection Algorithm in Multiple Scenarios Using Hough Transform
 
-James O&#39;Connor
-
-_IT Sligo_
+James O&#39;Connor  - _IT Sligo_
 
 **Abstract**
 
@@ -56,8 +54,15 @@ The algorithm was tested under **two conditions** :
 
 To test the first condition (i), the following hyper parameters permutations for the Probabilistic Hough Line were used.
 
-<img src="./static/Table_2.png">
+| **Run #** | **rho** | **theta** | **threshold** | **min\_line\_length** | **max\_line\_gap** |
+| --- | --- | --- | --- | --- | --- |
+| Run 1 | 1 | pi/180 | 90 | 50 | 90 |
+| Run 2 | 2 | pi/180 | 90 | 50 | 90 |
+| Run 3 | 1 | pi/180 | 50 | 50 | 100 |
+| Run 4 | 1 | pi/180 | 80 | 25 | 50 |
+| Run 5 | 2 | pi/90 | 80 | 10 | 150 |
 
+**Table 2: Variation of Hyperparameters**
 The outcome of the optimal hyperparameter permutation from condition (i) was used to test the second condition (ii). As this research is being conducted on an unlabelled dataset, the KITTI dataset could not be used to benchmark performnce without extensive image labelling. The approach by Nguyen, Pham, Kim, &amp; Jeon (2008) was used to measure the correctness of the algorithm. This framework involves counting the number of lines predicted in a frame and comparing to the true value (N = Number of Lines). Equations for each column are outlined in the original paper. Sample frames were taken at 20, 40, 60, 80 and 100 frames so they could be analysed to evaluate the performance of the algorithm in both condition (i) and condition (ii).
 
 # Results &amp; Discussion
@@ -66,11 +71,20 @@ The outcome of the optimal hyperparameter permutation from condition (i) was use
 
 A total of five runs were completed using the Hough Lines hyper parameters outlined in Table 3.
 
-<img src="./static/Table_3.png">
+
+| **Sample Frame** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 20 | 2 | 3 | 1 | 2 | 0 | 1 | 0.6667 |
+| 40 | 2 | 5 | 2 | 3 | 0 | 0 | 0.6000 |
+| 60 | 2 | 3 | 1 | 2 | 0 | 1 | 0.6667 |
+| 80 | 2 | 4 | 2 | 2 | 0 | 0 | 0.5000 |
+| 100 | 1 | 2 | 1 | 1 | 0 | 0 | 0.5000 |
+
+**Table 3: Run 1 Sample Frame Analysis**
+
 
 <img src="./static/Figure_3.png">
 
-**Table 4: Overall Results**
 
 | **Run #** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -80,13 +94,14 @@ A total of five runs were completed using the Hough Lines hyper parameters outli
 | 4 | 8 | 18 | 7 | 11 | 0 | 0 | 3.03 |
 | 5 | 8 | 21 | 7 | 14 | 0 | 0 | 3.23 |
 
+**Table 4: Overall Results**
+
 Each run identified the same number of correct line predictions. Run 1 performed the best as it had the lowest duplicate line rate and lowest false positive rate. Lowering the threshold increased the false positive rate as seen in Run 3. Increasing rho and lowering theta also increased the false positive rate as seen in Run 5.
 
 ## Condition (i) - Effect Of Scenarios
 
 Using the parameters from condition (i), the same approach was taken to test the in the eight scenarios outlined in Table 6.
 
-**Table 5: Scenario 1 Sample Frame Analysis**
 
 | **Sample Frame** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -97,7 +112,8 @@ Using the parameters from condition (i), the same approach was taken to test the
 | 100 | 1 | 5 | 1 | 2 | 2 | 0 | 0.8 |
 | Total | 9 | 17 | 6 | 8 | 3 | 3 | 3.067 |
 
-**Table 6: Overall Results**
+**Table 5: Scenario 1 Sample Frame Analysis**
+
 
 | **Scenario#** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Correct %** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -110,9 +126,12 @@ Using the parameters from condition (i), the same approach was taken to test the
 | 7 | 4 | 0 | 0 | 0.00% | 0 | 0 | 4 | 0.00 |
 | 8 | 10 | 20 | 10 | 100.00% | 10 | 0 | 0 | 0.00 |
 
+**Table 6: Overall Results**
+
+
 Scenario 3 and scenario 8 scored the highest overall. Interestingly, scenario 8 included light rain but scored the same as a bright day. Clear road markings had a very positive impact on detection. Heavy rain had a very negative impact as seen in scenario 7. Normal to High angled camera angles scored better than low angled shots due to more of the line being available to classify. Scenario 2 had a number of bends and direct sunlight exposure which resulted in a low classification score.
 
-1.
+
 # Conclusion and Future Research
 
 To conclude, the research showed that the scenario and the Hough Transform hyperparameters both affect the performance of the algorithm, but the former to a much larger extent. Ultimately there are a multitude of variables to contend with, making generalizing a model that works in all situations very difficult. There are a number of directions this research can take. In terms of test case generation, a wider set of test cases can be undertaken to include other environmental factors such as vehicle dynamics, road marking definition and traffic. Different colour scales such as HSV (hue, saturation, value) or HLS (hue, lightness, saturation) could be tested during image pre-processing phase of the algorithm to better expose the road markings. Logic to determine the vanishing point could be added to the algorithm to dynamically set create a dynamic mask to optimise the computation area of the images on which we run Canny detection and Hough Transform. Similarly, experiments could be conducted to determine the optimal parameters for each scenario and a scenario detection algorithm using a Convolutional Neural Network (CNN) could be used to detect the scenario type and set the parameters accordingly.
