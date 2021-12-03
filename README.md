@@ -72,6 +72,7 @@ To test the first condition (i), the following hyper parameters permutations for
 | Run 5 | 2 | pi/90 | 80 | 10 | 150 |
 
 **Table 2: Variation of Hyperparameters**
+
 The outcome of the optimal hyperparameter permutation from condition (i) was used to test the second condition (ii). As this research is being conducted on an unlabelled dataset, the KITTI dataset could not be used to benchmark performnce without extensive image labelling. The approach by Nguyen, Pham, Kim, &amp; Jeon (2008) was used to measure the correctness of the algorithm. This framework involves counting the number of lines predicted in a frame and comparing to the true value (N = Number of Lines). Equations for each column are outlined in the original paper. Sample frames were taken at 20, 40, 60, 80 and 100 frames so they could be analysed to evaluate the performance of the algorithm in both condition (i) and condition (ii).
 
 # Results &amp; Discussion
