@@ -1,5 +1,4 @@
 env/*
-video_input/*
-output/*
 .vscode/
 images/*
+output/*
