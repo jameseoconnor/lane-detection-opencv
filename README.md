@@ -35,7 +35,7 @@ There does not seem to be a consensus on how to test lane following algorithms, 
 
 The algorithm design was based on Yoo, Lee, Park, &amp; Kim (2017) and code by pknowledge (2020) and is outlined in Figure 1. This algorithm was be repeated for each frame of the video The sample videos ran at 24 FPS and resolution 720p on a 2 GHz Quad-Core Intel Core i5.
 
-![Figure_1](https://github.com/jameseoconnor/lane-detection-opencv/blob/main/static/Figure_1.png)
+<img src="https://github.com/jameseoconnor/lane-detection-opencv/blob/main/static/Figure_1.png" width="40%">
 
 **Figure 1: Algorithm Design**
 
