@@ -3,9 +3,7 @@ camera parameter finding module for my colllege assignment using OpenCV
 
 # Evaluating Lane Detection Algorithm in Multiple Scenarios Using Hough Transform
 
-James O&#39;Connor
-
-_IT Sligo_
+James O&#39;Connor - _IT Sligo_
 
 **Abstract**
 
