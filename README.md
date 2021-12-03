@@ -70,7 +70,15 @@ A total of five runs were completed using the Hough Lines hyper parameters outli
 
 <img src="./static/Figure_3.png">
 
-<img src="./static/Table_4.png">
+**Table 4: Overall Results**
+
+| **Run #** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 9 | 17 | 7 | 10 | 0 | 2 | 2.93 |
+| 2 | 9 | 19 | 7 | 12 | 0 | 2 | 2.43 |
+| 3 | 9 | 20 | 7 | 13 | 0 | 2 | 3.18 |
+| 4 | 8 | 18 | 7 | 11 | 0 | 0 | 3.03 |
+| 5 | 8 | 21 | 7 | 14 | 0 | 0 | 3.23 |
 
 Each run identified the same number of correct line predictions. Run 1 performed the best as it had the lowest duplicate line rate and lowest false positive rate. Lowering the threshold increased the false positive rate as seen in Run 3. Increasing rho and lowering theta also increased the false positive rate as seen in Run 5.
 
