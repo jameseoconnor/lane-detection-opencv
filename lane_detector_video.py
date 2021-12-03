@@ -48,14 +48,16 @@ def save_image(image, frame_count, tag):
     cv2.imwrite(save_location, image)
 
 def process(image, save_frame, frame_count):
-    print(image.shape)
     height = image.shape[0]
     width = image.shape[1]
-    region_of_interest_vertices = [
-        (0, height),
-        (width/2, height*0.7),
-        (width, height)
+
+    region_of_interest_vertices =   [
+        (width/2, height/2),
+        (width/2, height/4),
+        (width, height/4),
+        (width, height/2)
     ]
+
     grey_image = grey(image)
     gaussian_image = gauss(grey_image)
     canny_image = canny(gaussian_image)
@@ -69,11 +71,11 @@ def process(image, save_frame, frame_count):
 
     lines = cv2.HoughLinesP(cropped_image,
                             rho=2,
-                            theta=np.pi/180,
-                            threshold=80,
+                            theta=np.pi/90,
+                            threshold=95,
                             lines=np.array([]),
                             minLineLength=20,
-                            maxLineGap=200)
+                            maxLineGap=20)
 
     if lines is not None:
         image_with_lines = drow_the_lines(image, lines)
@@ -88,7 +90,7 @@ try:
     video_title = sys.argv[1] 
 except:
     # Test
-    video_title =  'scenario1_clear_urban'
+    video_title =  'default'
 
 
 dirname = os.path.dirname(__file__)

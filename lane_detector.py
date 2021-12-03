@@ -86,6 +86,17 @@ def canny(image):
     edges = cv2.Canny(image,50,150)
     return edges
 
+def set_directories(video_title):
+    dirname = os.path.dirname(__file__)
+    video_directory = os.path.join(dirname, 'video_input')
+    video_path = os.path.join(video_directory, video_title + ".mp4")
+    run_name = video_title + "/{0}/".format(datetime.datetime.utcnow().strftime("%s"))
+    output_path = os.path.join("output/" + run_name)
+    os.makedirs(output_path)
+
+    return video_path, output_path
+
+    
 
 # image = cv2.imread('road.jpg')
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -117,13 +128,49 @@ def process(image):
     
     return image
 
-cap = cv2.VideoCapture('road_short.mp4')
 
-while cap.isOpened():
+try: 
+    video_title = sys.argv[1] 
+    runtime = int(sys.argv[2])
+    test_sample_frame = int(sys.argv[3])
+except:
+    # Test Data
+    video_title =  'default'
+
+    # Runtime of the video in seconds
+    runtime = 30
+    test_sample_frame = None
+
+# Initialise frame count 
+frame_count = 0
+
+# Setup directores for output 
+video_path, output_path = set_directories(video_title)
+
+# create video capture
+cap = cv2.VideoCapture(video_path)
+
+# while the video plays or if we have set a runtime
+while cap.isOpened() and (frame_count/cv2.cv2.CAP_PROP_FPS)<runtime:
     ret, frame = cap.read()
+    key=cv2.waitKey(1)
+    save_frame = False
+
     if frame is not None:
-        frame = process(frame)
+        frame_count+=1
+
+        if key == 27:
+            break
+    
+        elif key == 32 or (frame_count%20 == 0 and frame_count<=101):
+            save_frame = True   
+
+        frame = process(frame, save_frame, frame_count)    
         cv2.imshow('frame', frame)
+
+        if save_frame:
+            save_image(frame, frame_count, "frame")
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
