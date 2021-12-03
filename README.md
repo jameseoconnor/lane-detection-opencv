@@ -11,14 +11,13 @@ _IT Sligo_
 
 In this paper the application of an edge detection algorithm was explored using Canny edge detection and the Hough Transform. The Hough Transform algorithm, and its associated hyperparameters was tested in eight distinct road scenarios using a test framework. Results were compared to determine the optimal hyperparameters as well as determining the effect of influential factors on the performance.
 
-1.
 # Introduction
 
 Edge detection algorithms have been used for a number of years for various applications . One of the key applications of edge detection algorithms in the autonomous vehicles industry is lane detection. Lane detection is the critical component in the application of various features in intelligent vehicles. Examples of these include lane detection warning (LDW), lane departure prevention (LDP) as well as enabling autonomous and driverless vehicles to perceive their environments and navigate. LWD and LDP systems have been shown to reduce crashes by 26% and 32% respectively (NHTSA, 2016) and have become such a critical component of intelligent vehicles that they will become mandatory in all vehicles within the EU by 2022 (European Parliament, 2019).
 
 In many computer vision problems concerning intelligent vehicles, such as pedestrian and object detection, sensor fusion of cameras with ranging sensors such as LiDAR, RADAR can complement the overall object detection capabilities of the intelligent vehicles. Similarly, they can act as a redundancy in the event of low visibility conditions or a compromised camera sensor. However, lane detection algorithms rely solely on the input from the camera (or cameras) to perform a classification. Adverse weather conditions affect the cameras range of visibility (snow, rain, fog), the ability to find occluded road markings (snow) or contrast (sunny). Therefore, developing a robust, high availability lane detectors using camera input is critical to the safety and reliability of these systems. Code for this paper can be found [here](https://github.com/jameseoconnor/lane-detection-opencv).
 
-1.
+
 # Review of Literature
 
 ## Algorithm Design
@@ -29,7 +28,7 @@ The original edge finding algorithm was proposed by John Canny (Canny, 1986) use
 
 There does not seem to be a consensus on how to test lane following algorithms, however there is a number of datasets that are used as benchmarks. One of these is the KITTI dataset which includes 289 training and 290 test images that have been labelled and can be used to benchmark lane detection algorithms. Bush &amp; Esposito (2010) adopted a simple testing approach to evaluation the performance by manually assigning the classification a score from 0 to 3, 3 being excellent and 0 being detrimental. Nguyen, Pham, Kim, &amp; Jeon (2008) defined a test framework for the accuracy of line detection by Hough Transform and involves counting the number of lines predicted and comparing to the true value and calculates the false positives and negatives.
 
-1.
+
 # Method
 
 ## Algorithm Design
@@ -44,26 +43,9 @@ The algorithm design was based on Yoo, Lee, Park, &amp; Kim (2017) and code by p
 
 As the goal of this paper is to investigate the efficacy of a lane detection algorithm in different scenarios, the initial step was to design the test scenarios based on the video selected for analysis. Xia, Duan, Gao, Hu, &amp; He (2018) provide a test scenario design framework for intelligent vehicles that ensures adequate coverage and effectiveness. The framework works as follows: decide the influential factors, rank them by degree of importance, create combinatorial test cases for all of these factors and then group them into larger test cases. The figures below were taken from the paper, which lists a number of influential factors including environment, road, traffic and vehicle dynamics. However, for the sake of brevity, as well as not having access to vehicle dynamics data, the factors were not weighted and only environment camera and traffic conditions were considered as test case variables.
 
-| **Level 1** | **Level 2** | **Level 3** |
-| --- | --- | --- |
-| **IF** | **IF** | **IF** |
-| Environmental Factors | Weather | Fine (Bright) |
-| Fine (Overcast) |
-| Rain (light) |
-| Rain (heavy) |
-| Time | Daytime |
-| Night Streetlight |
-| Night No Streetlight |
-| Light Change | Tunnel |
-| Bridge |
-| No Change |
-| Camera | Angle | Low |
-| Normal |
-| High |
-| Traffic | Vehicle Flow | 10% |
-| 80% |
 
-**Figure 2: Influential Factors Affecting Lane Detection**
+![Figure_2](static/Figure_2.jpg)
+
 
 From these influential factors, eight scenarios were derived as seen in Table 1. These test scenarios were designed to give a high coverage of each influential factor.
 
