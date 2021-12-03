@@ -3,7 +3,9 @@ camera parameter finding module for my colllege assignment using OpenCV
 
 # Evaluating Lane Detection Algorithm in Multiple Scenarios Using Hough Transform
 
-James O&#39;Connor - _IT Sligo_
+James O&#39;Connor
+
+_IT Sligo_
 
 **Abstract**
 
@@ -76,13 +78,33 @@ Each run identified the same number of correct line predictions. Run 1 performed
 
 Using the parameters from condition (i), the same approach was taken to test the in the eight scenarios outlined in Table 6.
 
-<img src="./static/Table_5.png">
+**Table 5: Scenario 1 Sample Frame Analysis**
 
-<img src="./static/Table_6.png">
+| **Sample Frame** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 20 | 2 | 5 | 2 | 2 | 1 | 0 | 0.6 |
+| 40 | 2 | 3 | 1 | 2 | 0 | 1 | 0.667 |
+| 60 | 2 | 2 | 1 | 1 | 0 | 1 | 0.5 |
+| 80 | 2 | 2 | 1 | 1 | 0 | 1 | 0.5 |
+| 100 | 1 | 5 | 1 | 2 | 2 | 0 | 0.8 |
+| Total | 9 | 17 | 6 | 8 | 3 | 3 | 3.067 |
+
+**Table 6: Overall Results**
+
+| **Scenario#** | **N\_True** | **N\_Detected** | **N\_Correct** | **N\_Correct %** | **N\_Duplicate** | **N\_Superfluous** | **N\_False\_Negatives** | **N\_False\_Positives** |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 9 | 17 | 6 | 66.67% | 8 | 3 | 3 | 3.07 |
+| 2 | 12 | 13 | 5 | 41.67% | 6 | 2 | 7 | 2.33 |
+| 3 | 11 | 16 | 11 | 100.00% | 5 | 0 | 0 | 1.05 |
+| 4 | 10 | 17 | 8 | 80.00% | 9 | 0 | 2 | 1.82 |
+| 5 | 9 | 13 | 8 | 88.89% | 5 | 0 | 1 | 1.73 |
+| 6 | 9 | 17 | 8 | 88.89% | 9 | 0 | 1 | 2.07 |
+| 7 | 4 | 0 | 0 | 0.00% | 0 | 0 | 4 | 0.00 |
+| 8 | 10 | 20 | 10 | 100.00% | 10 | 0 | 0 | 0.00 |
 
 Scenario 3 and scenario 8 scored the highest overall. Interestingly, scenario 8 included light rain but scored the same as a bright day. Clear road markings had a very positive impact on detection. Heavy rain had a very negative impact as seen in scenario 7. Normal to High angled camera angles scored better than low angled shots due to more of the line being available to classify. Scenario 2 had a number of bends and direct sunlight exposure which resulted in a low classification score.
 
-
+1.
 # Conclusion and Future Research
 
 To conclude, the research showed that the scenario and the Hough Transform hyperparameters both affect the performance of the algorithm, but the former to a much larger extent. Ultimately there are a multitude of variables to contend with, making generalizing a model that works in all situations very difficult. There are a number of directions this research can take. In terms of test case generation, a wider set of test cases can be undertaken to include other environmental factors such as vehicle dynamics, road marking definition and traffic. Different colour scales such as HSV (hue, saturation, value) or HLS (hue, lightness, saturation) could be tested during image pre-processing phase of the algorithm to better expose the road markings. Logic to determine the vanishing point could be added to the algorithm to dynamically set create a dynamic mask to optimise the computation area of the images on which we run Canny detection and Hough Transform. Similarly, experiments could be conducted to determine the optimal parameters for each scenario and a scenario detection algorithm using a Convolutional Neural Network (CNN) could be used to detect the scenario type and set the parameters accordingly.
