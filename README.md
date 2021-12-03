@@ -45,6 +45,7 @@ From these influential factors, eight scenarios were derived as seen in Table 1.
 
 
 | **Scenario #** | **Weather** | **Time** | **Light Change** | **Angle** | **Vehicle Flow** |
+| --- | --- | --- | --- | --- | --- |
 | 1 | Fine (B) | Daytime | No Change | Low | 10 |
 | 2 | Fine (B) | Daytime | None | Normal | 10 |
 | 3 | Fine (B) | Daytime | Tunnel | Normal | 80 |
